@@ -27,6 +27,17 @@ const gameStore = getGameStore();
     flex: 1;
     .game-square {
       flex: 1;
+      background-color: white;
+      box-shadow: inset 1px 1px blue;
+      &:last-of-type {
+        box-shadow: inset blue -1px 0, inset 1px 1px blue;
+      }
+    }
+    &:last-of-type > .game-square {
+      box-shadow: inset blue 0 -1px, inset 1px 1px blue;
+      &:last-of-type {
+      box-shadow: inset blue -1px -1px, inset 1px 1px blue;
+      }
     }
   }
 }

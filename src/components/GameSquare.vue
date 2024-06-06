@@ -1,18 +1,36 @@
 <template>
-  <div :style="`background-color: white`">
-    {{props.square.terrain}}
+  <div>
+    <img 
+      style="position: absolute"
+      :style="imgCss"
+      src="https://raw.githubusercontent.com/ductapemobie/various-assets/main/arrow.png"
+      v-if="props.square.inhabitant"
+    >
   </div>
 </template>
 
 <script setup lang="ts">
 import { getGameStore } from '@/store/game-store';
-import { Terrain, type Square } from '@/types';
+import type { Direction, Square } from '@/types';
+import { computed } from 'vue';
 
 const gameStore = getGameStore();
 const props = defineProps<{
   square: Square
 }>()
-const sq: Square = {terrain: Terrain.path}
+
+const degMap: Record<Direction, string> = {
+  'down': '180',
+  'up': '0',
+  'right': '90',
+  'left': '270',
+}
+
+const imgCss = computed(() =>
+  ({
+    transform: `rotate(${degMap[gameStore.charPosition.direction]}deg)`
+  })
+)
 
 </script>
 

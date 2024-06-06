@@ -13,11 +13,13 @@
 import GameSpace from './components/GameSpace.vue';
 import TopHeader from './components/TopHeader.vue';
 import { onMounted, ref } from 'vue';
+import { getGameStore } from './store/game-store';
 
+const gameStore = getGameStore();
 const appRef = ref<HTMLInputElement | null>(null);
 
 function handleInput(event: any){
-  console.log(event)
+  gameStore.handleKeypress(event.key);
 }
 const val = console;
 onMounted(function() {
